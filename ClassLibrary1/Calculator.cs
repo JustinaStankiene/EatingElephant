@@ -4,7 +4,7 @@ namespace ClassLibrary1
 {
     public class Calculator 
     {
-        public double Sum(double x, double y)
+        public double Add(double x, double y)
         {
             return x + y;
         }
