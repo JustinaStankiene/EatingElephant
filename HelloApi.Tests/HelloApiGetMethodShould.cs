@@ -12,23 +12,24 @@ namespace HelloApi.Tests
         [TestCase("Ruta")]
         [TestCase("Eimante")]
         [TestCase("Gediminas")]
-        public void ReturnGreetingAndName(string name)
+        public async Task ReturnGreetingAndName(string name)
         {
-            HttpClient client = new HttpClient();
-
-            string url = $"https://localhost:44375/helloapi?name={name}";
-
-            var request = new HttpRequestMessage
+            using (HttpClient client = new HttpClient())
             {
-                RequestUri = new Uri(url),
-                Method = HttpMethod.Get
-            };
+                string url = $"https://localhost:44375/helloapi?name={name}";
 
-            using (var response = client.SendAsync(request).Result)
-            {
-                var responseString = response.Content.ReadAsStringAsync().Result;
+                var request = new HttpRequestMessage
+                {
+                    RequestUri = new Uri(url),
+                    Method = HttpMethod.Get
+                };
 
-                Assert.AreEqual($"Hello, {name}", responseString);
+                using (var response = client.SendAsync(request).Result)
+                {
+                    var responseString = await response.Content.ReadAsStringAsync();
+
+                    Assert.AreEqual($"Hello, {name}", responseString);
+                }
             }
 
         }
