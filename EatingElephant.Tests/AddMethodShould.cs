@@ -9,12 +9,15 @@ namespace EatingElephant.Tests
         [TestCase(2, 2, 4)]
         [TestCase(1, 1, 2)]
         [TestCase(3, 5, 8)]
-        public void AddTwoNumbers(double num1, double num2, double result)
+        public void AddTwoNumbers(int num1, int num2, int result)
         {
             var calculator = new Calculator();
             var sum = calculator.Add(num1, num2);
 
             Assert.That(sum, Is.EqualTo(result));
         }
+
     }
+
+
 }
